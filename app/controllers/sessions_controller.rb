@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate_user, only: :create
+  skip_before_action :authenticate_user
 
   def create
     resp = Faraday.get("https://foursquare.com/oauth2/access_token") do |req|
@@ -14,5 +14,4 @@ class SessionsController < ApplicationController
     session[:token] = body["access_token"]
     redirect_to root_path
   end
-
 end
